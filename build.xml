@@ -1,12 +1,8 @@
 <project default="compile">
   
   <property environment="env"/> 
-  <property name="webRoot" value="${env.HOME}/public_html/cs56" />
-  <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
 
-  <property name="projectName" value="lab03" /> 
-  <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
-  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
+  <property name="projectName" value="sortdemo" /> 
 
   <path id="project.class.path">
     <pathelement location="build"/>
@@ -22,53 +18,12 @@
   </javac>
   </target>
 
-  <target name="run" depends="test" description="run the UCSBCourseTester program">
-    <java classname="Polynomial">
+  <target name="run"  description="run the program">
+    <java classname="Student">
 
     <classpath refid="project.class.path" />
     </java>
   </target>
-
-  <target name="test" description="run JUnit tests"  depends="compile">
-
-    <junit haltonerror="no" haltonfailure="no">
-       <batchtest fork="yes">
-          <fileset dir="src">
-<!-- this will pick up every class with a name ending in Test -->
-            <include name="**/*Test.java"/>
-          </fileset>
-       </batchtest>
-        <formatter type="plain" usefile="false" /> 
-       <classpath refid="project.class.path" />       
-    </junit>
-  </target>
-
- <target name="javadoc" depends="compile">                                                        
-                                                                                                  
-   <delete dir="javadoc" quiet="true" />                                                          
-   <javadoc  destdir="javadoc" author="true" version="true" use="true" >                              <classpath refid="project.class.path" />
-      <fileset dir="." includes="**/*.java"/>                                                     
-   </javadoc>                                                                                     
-                                                                                                  
-   <!-- delete the old javadoc -->                                                                
-   <delete quiet="true" dir="${javadocDest}" />                                                   
-                                                                                                  
-   <!-- copy everything you just made to the javadoc destination, and then make it readable -->   
-                                                                                                  
-   <copy todir="${javadocDest}" >                                                                 
-     <fileset dir="javadoc"/>                                                                     
-   </copy>                                                                                        
-                                                                                                  
-   <!-- Note: this only does the chmod command on the                                             
-        javadoc subdirectory and its contents.  You MIGHT have to                                 
-        MANUALLY do the chmod on the parent directories.  However,                                
-        you should only need to do that once. -->                                                 
-                                                                                                  
-   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
-   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />                         
-   <echo>Javadoc deployed to ${javadocURL}</echo>                                                 
-                                                                                                  
- </target>        
 
 
  <target name="clean">
