@@ -20,10 +20,25 @@ public class Student {
 	java.util.ArrayList<Student> classroom =
 	    new java.util.ArrayList<Student>();
 	classroom.add(new Student(1234567,"Smith"));
-	classroom.add(new Student(2345678,"Jones"));
-	classroom.add(new Student(3456789,"Perez"));		  
+	classroom.add(new Student(3345678,"Jones"));
+	classroom.add(new Student(2456789,"Perez"));		  
 	System.out.println("classroom=" + classroom);
-	
+
+
+	System.out.println("Sort dat arraylist by lname");
+
+	java.util.Collections.sort(classroom, (s1, s2) ->
+			 s1.getName().compareTo(s2.getName()));
+	System.out.println("sorted by lname classroom=" + classroom);	
+
+	System.out.println("Sort dat arraylist by perm");
+
+	java.util.Collections.sort(classroom, (s1, s2) ->
+				   s1.getPerm() -  s2.getPerm());
+
+	System.out.println("sorted by perm classroom=" + classroom);	
+
+
     }
     
 }
